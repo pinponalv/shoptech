@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IPermissionService {
     PermissionResponse createPermission(PermissionRequest request);
-    PermissionResponse updatePermission(PermissionRequest request);
+    PermissionResponse updatePermission(Long id,PermissionRequest request);
     PermissionResponse findById(Long id);
     List<PermissionResponse> findAll();
     void deletePermission(Long id);
