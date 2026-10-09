@@ -9,7 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PermissionResponse {
+public class RoleIdRequest {
     private Long id;
-    private String permissionName;
 }

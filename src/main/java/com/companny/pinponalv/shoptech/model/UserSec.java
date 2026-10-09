@@ -50,12 +50,12 @@ public class UserSec {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_orders", joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "order_id"))
-    private Orders orders;
+    private List<Orders> orders;
 
     @OneToOne
     @JoinTable(name = "user_carts", joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "cart_id"))
-    private Cart cart;
+    private List<Cart> cart;
 
 
 

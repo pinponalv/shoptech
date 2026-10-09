@@ -16,7 +16,7 @@ public class UserResponse {
     private Long id;
     private String name;
     private String lastName;
-    private String phoneNumber;
+    private String numberPhone;
     private String email;
     private String password;
     private LocalDateTime createdAt;

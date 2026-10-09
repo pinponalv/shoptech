@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IRolesService {
     RoleResponse createRole(RoleRequest roleRequest);
-    RoleResponse updateRole(RoleRequest roleRequest);
+    RoleResponse updateRole(Long id,RoleRequest roleRequest);
     List<RoleResponse> findAll();
     RoleResponse findById(Long id);
     void deleteRole(Long id);

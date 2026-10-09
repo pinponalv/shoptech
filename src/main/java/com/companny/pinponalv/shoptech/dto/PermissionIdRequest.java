@@ -1,5 +1,6 @@
 package com.companny.pinponalv.shoptech.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PermissionResponse {
+public class PermissionIdRequest {
+    @NotNull(message = "id is mandatory")
     private Long id;
-    private String permissionName;
 }

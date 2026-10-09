@@ -17,5 +17,5 @@ public class UserRequest {
     private String phoneNumber;
     private String email;
     private String password;
-    private Set<RoleResponse> roles;
+    private Set<RoleIdRequest> roles;
 }

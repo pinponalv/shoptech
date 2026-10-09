@@ -1,5 +1,7 @@
 package com.companny.pinponalv.shoptech.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +14,8 @@ import java.util.Set;
 @Getter
 @Setter
 public class RoleRequest {
+    @NotBlank
     private String role;
-    private Set<PermissionRequest> permissions;
+    @NotEmpty
+    private Set<PermissionIdRequest> permissions;
 }
