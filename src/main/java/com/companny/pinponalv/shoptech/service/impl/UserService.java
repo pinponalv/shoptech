@@ -1,7 +1,6 @@
 package com.companny.pinponalv.shoptech.service.impl;
 
 import com.companny.pinponalv.shoptech.dto.RoleIdRequest;
-import com.companny.pinponalv.shoptech.dto.RoleResponse;
 import com.companny.pinponalv.shoptech.dto.UserRequest;
 import com.companny.pinponalv.shoptech.dto.UserResponse;
 import com.companny.pinponalv.shoptech.mapper.UserMapper;
