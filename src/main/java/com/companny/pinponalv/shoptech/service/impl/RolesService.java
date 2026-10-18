@@ -27,8 +27,8 @@ public class RolesService implements IRolesService {
     public RoleResponse createRole(RoleRequest roleRequest) {
         Roles role = new Roles();
 
-        role.setRole(roleRequest.getRole());
-        role.setPermissionsList(resolvePermissions(roleRequest.getPermissions()));
+        role.setRole(roleRequest.role());
+        role.setPermissionsList(resolvePermissions(roleRequest.permissions()));
         Roles saved = rolesRepository.save(role);
 
         return toRoleResponse(saved);
@@ -40,12 +40,12 @@ public class RolesService implements IRolesService {
     public RoleResponse updateRole(Long id,RoleRequest roleRequest) {
         Roles role = rolesRepository.findById(id).orElseThrow(() -> new RuntimeException("Role not found"));
 
-        if(roleRequest.getRole() != null) {
-            role.setRole(roleRequest.getRole());
+        if(roleRequest.role() != null) {
+            role.setRole(roleRequest.role());
         }
 
-        if(roleRequest.getPermissions() != null) {
-            role.setPermissionsList(resolvePermissions(roleRequest.getPermissions()));
+        if(roleRequest.permissions() != null) {
+            role.setPermissionsList(resolvePermissions(roleRequest.permissions()));
         }
 
         Roles saved = rolesRepository.save(role);
@@ -83,7 +83,7 @@ public class RolesService implements IRolesService {
     private Set<Permission> resolvePermissions(Set<PermissionIdRequest> permissionId) {
         Set<Permission> permissions = new HashSet<>();
         for(PermissionIdRequest permission : permissionId){
-            Permission readPermission = permissionRepository.findById(permission.getId())
+            Permission readPermission = permissionRepository.findById(permission.id())
                     .orElseThrow(() -> new RuntimeException("Permission not found"));
             permissions.add(readPermission);
         }
@@ -93,17 +93,15 @@ public class RolesService implements IRolesService {
     private RoleResponse toRoleResponse(Roles roles) {
         Set<PermissionResponse> permissionList = new HashSet<>();
         for(Permission permission: roles.getPermissionsList()){
-            PermissionResponse response = new PermissionResponse();
-
-            response.setId(permission.getId());
-            response.setPermission(permission.getPermissionName());
-            permissionList.add(response);
+            permissionList.add(new PermissionResponse(
+                    permission.getId(),
+                    permission.getPermissionName()
+            ));
         }
-
-        RoleResponse roleResponse = new RoleResponse();
-        roleResponse.setId(roles.getId());
-        roleResponse.setRole(roles.getRole());
-        roleResponse.setPermissions(permissionList);
-        return roleResponse;
+        return new RoleResponse(
+                roles.getId(),
+                roles.getRole(),
+                permissionList
+        );
     }
 }

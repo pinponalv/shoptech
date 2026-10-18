@@ -1,15 +1,6 @@
 package com.companny.pinponalv.shoptech.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-public class PermissionResponse {
-    private Long id;
-    private String permissionName;
-}
+public record PermissionResponse (
+        Long id,
+        String permissionName
+){}

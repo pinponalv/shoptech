@@ -40,11 +40,11 @@ public class UserService implements IUserSecService {
                 .orElseThrow(() -> new RuntimeException("role not found"));
 
         UserSec user = new UserSec();
-        user.setName(request.getName());
-        user.setLastName(request.getLastName());
-        user.setNumberPhone(request.getPhoneNumber());
-        user.setEmail(request.getEmail());
-        user.setPassword(encriptPassword(request.getPassword()));
+        user.setName(request.name());
+        user.setLastName(request.lastName());
+        user.setNumberPhone(request.phoneNumber());
+        user.setEmail(request.email());
+        user.setPassword(encriptPassword(request.password()));
         user.getRoles().add(role);
 
         return userMapper.toResponse(user);
@@ -56,23 +56,23 @@ public class UserService implements IUserSecService {
         UserSec user = userSecRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("user not found"));
 
-        if(request.getName() != null){
-            user.setName(request.getName());
+        if(request.name() != null){
+            user.setName(request.name());
         }
-        if(request.getLastName() != null){
-            user.setLastName(request.getLastName());
+        if(request.lastName() != null){
+            user.setLastName(request.lastName());
         }
-        if(request.getPhoneNumber() != null){
-            user.setNumberPhone(request.getPhoneNumber());
+        if(request.phoneNumber() != null){
+            user.setNumberPhone(request.phoneNumber());
         }
-        if(request.getEmail() != null){
-            user.setEmail(request.getEmail());
+        if(request.email() != null){
+            user.setEmail(request.email());
         }
-        if(request.getPassword() != null){
-            user.setPassword(encriptPassword(request.getPassword()));
+        if(request.password() != null){
+            user.setPassword(encriptPassword(request.password()));
         }
-        if(request.getRoles() != null){
-            user.setRoles(resolveRoles(request.getRoles()));
+        if(request.roles() != null){
+            user.setRoles(resolveRoles(request.roles()));
         }
 
         UserSec updatedUser = userSecRepository.save(user);
@@ -117,16 +117,16 @@ public class UserService implements IUserSecService {
     private Set<Roles> resolveRoles(Set<RoleIdRequest> roleIdRequests) {
         Set<Roles> roles = new HashSet<>();
         for(RoleIdRequest role: roleIdRequests){
-            Roles readRole = rolesRepository.findById(role.getId())
+            Roles readRole = rolesRepository.findById(role.id())
                     .orElseThrow(() -> new RuntimeException("Role Not Found"));
             roles.add(readRole);
         }
         return roles;
     }
 
-    //TODO: cambiar esta excepcion
+
     private void validateUser(UserRequest userRequest) {
-        if(userSecRepository.existsByEmail(userRequest.getEmail())){
+        if(userSecRepository.existsByEmail(userRequest.email())){
             throw new RuntimeException("Email Already Exists");
         }
     }
