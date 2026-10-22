@@ -19,7 +19,7 @@ public class PermissionService implements IPermissionService {
     @Override
     public PermissionResponse createPermission(PermissionRequest request) {
         Permission newPermission = new Permission();
-        newPermission.setPermissionName(request.getPermission());
+        newPermission.setPermissionName(request.permission());
 
         Permission savedPermission = permissionRepository.save(newPermission);
         return new PermissionResponse(
@@ -34,7 +34,7 @@ public class PermissionService implements IPermissionService {
         Permission permission = permissionRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Permission not found"));
 
-        permission.setPermissionName(request.getPermission());
+        permission.setPermissionName(request.permission());
         Permission savedPermission = permissionRepository.save(permission);
         return new PermissionResponse(
                 savedPermission.getId(),
